@@ -8,4 +8,17 @@ export class ActivityRepository {
   async findMany(): Promise<activities[]> {
     return this.prisma.activities.findMany();
   }
+  async save(
+    name: string,
+    email: string,
+    description: string,
+  ): Promise<activities> {
+    return this.prisma.activities.create({
+      data: {
+        name,
+        email,
+        description,
+      },
+    });
+  }
 }

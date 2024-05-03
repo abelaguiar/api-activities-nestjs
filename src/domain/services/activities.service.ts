@@ -8,4 +8,11 @@ export class ActivitiesService {
   async getActivities(): Promise<activities[]> {
     return this.repository.findMany();
   }
+  async postActivity(
+    name: string,
+    email: string,
+    description: string,
+  ): Promise<activities> {
+    return this.repository.save(name, email, description);
+  }
 }
