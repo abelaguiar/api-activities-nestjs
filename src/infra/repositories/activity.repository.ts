@@ -13,11 +13,14 @@ export class ActivityRepository {
     email: string,
     description: string,
   ): Promise<activities> {
+    const date = new Date();
+    const create_time = date.toJSON();
     return this.prisma.activities.create({
       data: {
         name,
         email,
         description,
+        create_time,
       },
     });
   }
