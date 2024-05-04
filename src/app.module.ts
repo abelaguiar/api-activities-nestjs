@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { ApplicationModule } from './application/application.module';
 import { DomainModule } from './domain/domain.module';
 import { InfraModule } from './infra/infra.module';
@@ -10,6 +11,14 @@ import { ActivityRepository } from './infra/repositories/activity.repository';
 @Module({
   imports: [ApplicationModule, DomainModule, InfraModule],
   controllers: [ActivitiesController],
-  providers: [ActivitiesService, ActivityRepository, PrismaService],
+  providers: [
+    ActivitiesService,
+    ActivityRepository,
+    PrismaService,
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}

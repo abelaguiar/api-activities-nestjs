@@ -11,11 +11,12 @@ export class ActivitiesController {
     return this.service.getActivities();
   }
   @Post('/create')
-  postActivity(@Body() request: ActivitiesRequest): Promise<activities> {
-    return this.service.postActivity(
+  async postActivity(@Body() request: ActivitiesRequest) {
+    const activity = this.service.postActivity(
       request.name,
       request.email,
       request.description,
     );
+    return activity;
   }
 }
