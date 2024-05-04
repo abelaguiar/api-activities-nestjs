@@ -42,4 +42,9 @@ export class ActivityRepository {
       },
     });
   }
+  async delete(id: number): Promise<activities> {
+    return this.prisma.activities.delete({
+      where: { id: id },
+    });
+  }
 }

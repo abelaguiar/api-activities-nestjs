@@ -23,4 +23,7 @@ export class ActivitiesService {
   ): Promise<activities> {
     return this.repository.update(id, name, email, description);
   }
+  async deleteActivity(id: number): Promise<activities> {
+    return this.repository.delete(id);
+  }
 }
