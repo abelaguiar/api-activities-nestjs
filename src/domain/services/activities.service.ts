@@ -15,4 +15,12 @@ export class ActivitiesService {
   ): Promise<activities> {
     return this.repository.save(name, email, description);
   }
+  async patchActivity(
+    id: number,
+    name: string,
+    email: string,
+    description: string,
+  ): Promise<activities> {
+    return this.repository.update(id, name, email, description);
+  }
 }

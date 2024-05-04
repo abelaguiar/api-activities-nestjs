@@ -1,4 +1,4 @@
-import { Controller, Body, Get, Post } from '@nestjs/common';
+import { Controller, Body, Get, Post, Patch } from '@nestjs/common';
 import { activities } from '@prisma/client';
 import { ActivitiesService } from 'src/domain/services/activities.service';
 import ActivitiesRequest from '../requests/activities.request';
@@ -12,11 +12,19 @@ export class ActivitiesController {
   }
   @Post('/create')
   async postActivity(@Body() request: ActivitiesRequest) {
-    const activity = this.service.postActivity(
+    return this.service.postActivity(
       request.name,
       request.email,
       request.description,
     );
-    return activity;
+  }
+  @Patch('/update')
+  async patchActivity(@Body() request: ActivitiesRequest) {
+    return this.service.patchActivity(
+      request.id,
+      request.name,
+      request.email,
+      request.description,
+    );
   }
 }

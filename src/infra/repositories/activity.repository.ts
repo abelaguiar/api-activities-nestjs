@@ -24,4 +24,22 @@ export class ActivityRepository {
       },
     });
   }
+  async update(
+    id: number,
+    name: string,
+    email: string,
+    description: string,
+  ): Promise<activities> {
+    const date = new Date();
+    const create_time = date.toJSON();
+    return this.prisma.activities.update({
+      where: { id: id },
+      data: {
+        name,
+        email,
+        description,
+        create_time,
+      },
+    });
+  }
 }
