@@ -1,8 +1,6 @@
 import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
 
 export default class ActivitiesRequest {
-  id: number;
-
   @IsString({ message: 'Nome tem que ser texto' })
   @IsNotEmpty({ message: 'Nome não pode ser vazio.' })
   name: string;
