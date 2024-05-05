@@ -5,9 +5,11 @@ import { activities } from '@prisma/client';
 @Injectable()
 export class ActivityRepository {
   constructor(private prisma: PrismaService) {}
+
   async findMany(): Promise<activities[]> {
     return this.prisma.activities.findMany();
   }
+
   async save(
     name: string,
     email: string,
@@ -24,6 +26,7 @@ export class ActivityRepository {
       },
     });
   }
+
   async update(
     id: number,
     name: string,
@@ -42,6 +45,7 @@ export class ActivityRepository {
       },
     });
   }
+
   async delete(id: number): Promise<activities> {
     return this.prisma.activities.delete({
       where: { id: id },
