@@ -6,6 +6,7 @@ import {
   Patch,
   Delete,
   Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { activities } from '@prisma/client';
 import { ActivitiesService } from 'src/domain/services/activities.service';
@@ -22,30 +23,19 @@ export class ActivitiesController {
 
   @Post('/')
   async postActivity(@Body() request: ActivitiesRequest) {
-    return this.service.postActivity(
-      request.name,
-      request.email,
-      request.description,
-    );
+    return this.service.postActivity(request);
   }
 
   @Patch('/:id')
   async patchActivity(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() request: ActivitiesRequest,
   ) {
-    const activityId = parseInt(id, 10);
-    return this.service.patchActivity(
-      activityId,
-      request.name,
-      request.email,
-      request.description,
-    );
+    return this.service.patchActivity(id, request);
   }
 
   @Delete('/:id')
-  async deleteActivity(@Param('id') id: string) {
-    const activityId = parseInt(id, 10);
-    return this.service.deleteActivity(activityId);
+  async deleteActivity(@Param('id', ParseIntPipe) id: number) {
+    return this.service.deleteActivity(id);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma-service';
 import { activities } from '@prisma/client';
+import ActivitiesRequest from 'src/application/requests/activities.request';
 
 @Injectable()
 export class ActivityRepository {
@@ -10,13 +11,12 @@ export class ActivityRepository {
     return this.prisma.activities.findMany();
   }
 
-  async save(
-    name: string,
-    email: string,
-    description: string,
-  ): Promise<activities> {
+  async save(request: ActivitiesRequest): Promise<activities> {
     const date = new Date();
     const create_time = date.toJSON();
+    const name = request.name;
+    const email = request.email;
+    const description = request.description;
     return this.prisma.activities.create({
       data: {
         name,
@@ -27,14 +27,12 @@ export class ActivityRepository {
     });
   }
 
-  async update(
-    id: number,
-    name: string,
-    email: string,
-    description: string,
-  ): Promise<activities> {
+  async update(id: number, request: ActivitiesRequest): Promise<activities> {
     const date = new Date();
     const create_time = date.toJSON();
+    const name = request.name;
+    const email = request.email;
+    const description = request.description;
     return this.prisma.activities.update({
       where: { id: id },
       data: {
