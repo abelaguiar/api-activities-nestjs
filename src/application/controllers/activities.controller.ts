@@ -8,7 +8,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { activities } from '@prisma/client';
+import { Activity } from '@prisma/client';
 import { ActivitiesService } from 'src/domain/services/activities.service';
 import ActivitiesRequest from '../requests/activities.request';
 
@@ -17,7 +17,7 @@ export class ActivitiesController {
   constructor(private readonly service: ActivitiesService) {}
 
   @Get('/')
-  getActivities(): Promise<activities[]> {
+  getActivities(): Promise<Activity[]> {
     return this.service.getActivities();
   }
 

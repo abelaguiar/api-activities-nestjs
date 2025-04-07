@@ -1,23 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../services/prisma-service';
-import { activities } from '@prisma/client';
+import { Activity } from '@prisma/client';
 import ActivitiesRequest from 'src/application/requests/activities.request';
 
 @Injectable()
 export class ActivityRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findMany(): Promise<activities[]> {
-    return this.prisma.activities.findMany();
+  async findMany(): Promise<Activity[]> {
+    return this.prisma.activity.findMany();
   }
 
-  async save(request: ActivitiesRequest): Promise<activities> {
+  async save(request: ActivitiesRequest): Promise<Activity> {
     const date = new Date();
     const create_time = date.toJSON();
     const name = request.name;
     const email = request.email;
     const description = request.description;
-    return this.prisma.activities.create({
+    return this.prisma.activity.create({
       data: {
         name,
         email,
@@ -27,13 +27,13 @@ export class ActivityRepository {
     });
   }
 
-  async update(id: number, request: ActivitiesRequest): Promise<activities> {
+  async update(id: number, request: ActivitiesRequest): Promise<Activity> {
     const date = new Date();
     const create_time = date.toJSON();
     const name = request.name;
     const email = request.email;
     const description = request.description;
-    return this.prisma.activities.update({
+    return this.prisma.activity.update({
       where: { id: id },
       data: {
         name,
@@ -44,8 +44,8 @@ export class ActivityRepository {
     });
   }
 
-  async delete(id: number): Promise<activities> {
-    return this.prisma.activities.delete({
+  async delete(id: number): Promise<Activity> {
+    return this.prisma.activity.delete({
       where: { id: id },
     });
   }

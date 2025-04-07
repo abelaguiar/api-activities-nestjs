@@ -1,16 +1,19 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model activities {
+model Activity {
   id          Int       @id @default(autoincrement())
   name        String    @db.VarChar(255)
   email       String    @db.VarChar(255)
   description String    @db.Text
-  create_time DateTime? @db.DateTime(0)
+  create_time DateTime? @db.Timestamp(6)
+
+  @@map("activities")
 }
